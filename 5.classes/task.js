@@ -64,24 +64,45 @@ class Library {
     this.books.push(book);
   }
   findBookBy(type, value) {
-    this.type = type;
-    this.value = value;
-    for (let i = 0; i < this.books.length; i++) {
-      if (this.type[i] == this.value) {
-        return this.book;
-      } if (this.name[i] == this.value) {
-        return this.book;
-      } else {
-        return null;
-      }
+    //this.type = type;
+    //this.value = value;
+    //for (let i = 0; i < this.books.length; i++) {
+    //  if (this.type[i] == this.value) {
+    //    return this.type;
+    //  } else {
+    //    return null;
+    //  }
+    //}
+    let book = this.books.find(function(item) {
+      if(item[type] === value) {
+        return item[type];
+      } 
+    })
+    if (book != undefined) {
+      return book;
+    } else {
+      return null;
     }
-  }
+  }  
   giveBookByName(bookName) {
-    this.bookName = bookName;
-    for (let i = 0; i < this.books.length; i++) {
-      if (bookName[i] == this.name) {
-        return bookName[i] && this.books.filter(book => book.this.name != bookName);
+    //this.bookName = bookName;
+    //for (let i = 0; i < this.books.length; i++) {
+    //  if (bookName[i] == this.name) {
+    //    return bookName[i] && this.books.filter(book => book.bookName !== this.name);
+    //  } else {
+    //    return null;
+    //  }
+    //}
+    let book = this.books.find((n) => {
+      if (n[bookName] == this.name) {
+        return n[bookName];
       }
+    })
+    if (book != undefined) {
+      this.books.filter(b => b.book != this.name);
+      return book;
+    } else {
+      return null;
     }
   }
 }
