@@ -9,17 +9,17 @@ class PrintEditionItem {
   fix() {
     this.state *= 1.5;
   }
-  set _state(fixed) {
-    if (this.state < 0) {
-      this.state = 0;
-    } if (this.state > 100) {
-        this.state = 100;
+  set state(fixed) {
+    if (this._state < 0) {
+      this._state = 0;
+    } if (this._state > 100) {
+        this._state = 100;
       } else {
-        this.state = fixed;
+        this._state = fixed;
       }
   }
-  get _state() {
-    return this.state;
+  get state() {
+    return this._state;
   }
 }
 class Magazine extends PrintEditionItem {
@@ -54,14 +54,16 @@ class DetectiveBook extends Book {
     this.type = "detective";    
   }
 }
-
+let book = new PrintEditionItem;
 class Library {
-  constructor(name, books) {
+  constructor(name) {      
     this.name = name;
-    this.books = [];
+    this.books = [];    
   }
-  addBook(book) {
-    this.books.push(book);
+  addBook (book) {
+    if (book.state > 30) {
+      this.books.push(book);
+    }   
   }
   findBookBy(type, value) {
     //this.type = type;
@@ -73,36 +75,11 @@ class Library {
     //    return null;
     //  }
     //}
-    let book = this.books.find(function(item) {
-      if(item[type] === value) {
-        return item[type];
-      } 
-    })
-    if (book != undefined) {
-      return book;
-    } else {
-      return null;
-    }
+    const findResult = this.books.find((item) => item[type] === value);
+    return findResult || null;
   }  
-  giveBookByName(bookName) {
-    //this.bookName = bookName;
-    //for (let i = 0; i < this.books.length; i++) {
-    //  if (bookName[i] == this.name) {
-    //    return bookName[i] && this.books.filter(book => book.bookName !== this.name);
-    //  } else {
-    //    return null;
-    //  }
-    //}
-    let book = this.books.find((n) => {
-      if (n[bookName] == this.name) {
-        return n[bookName];
-      }
-    })
-    if (book != undefined) {
-      this.books.filter(b => b.book != this.name);
-      return book;
-    } else {
-      return null;
-    }
+  giveBookByName(bookName) {    
+    let delivery = this.books.find((item) => item[book.name] == bookName);
+    return (delivery && delete book.name) || null;    
   }
 }
