@@ -1,15 +1,14 @@
 ﻿function parseCount(number) {
-  if (!Number.parseFloat(number)) {
+  let parse = Number.parseFloat(number);  
+  if (isNaN(parse)) {
     throw new Error("Невалидное значение");
+  } else {
+    return parse;
   }  
-  return parseFloat(number);
 }
 function validateCount(number) {
-  try {
-    if (!Number.parseFloat(number)) {     
-        throw new Error("Невалидное значение");   
-      }  
-      return parseFloat(number);
+  try {    
+    return parseCount(number);
   } catch(error) {    
       return error;
     }  
@@ -20,17 +19,10 @@ class Triangle {
     this.first = first;
     this.second = second;
     this.third = third;
-    this.triangleExist();
-  }
-  triangleExist() {
-    if ((this.first + this.second) < this.third) {
-      throw new Error("Треугольник с такими сторонами не существует");
-    } else if ((this.first + this.third) < this.second) {
-        throw new Error("Треугольник с такими сторонами не существует");
-    } else if ((this.second + this.third) < this.first) {
-        throw new Error("Треугольник с такими сторонами не существует");
+    if (((first + second) < third) || ((first + third) < second) || ((second + third) < first)) {
+      throw new Error("Треугольник с такими сторонами не существует");    
     }
-  }
+  }  
   get perimeter() {
     return this.first + this.second + this.third;
   }
