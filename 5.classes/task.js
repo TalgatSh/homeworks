@@ -1,18 +1,18 @@
 class PrintEditionItem {
-  constructor(name, releaseDate, pagesCount, state = 100, type = null) {
+  constructor(name, releaseDate, pagesCount) {
     this.name = name;
     this.releaseDate = releaseDate;
-    this.pagesCount = pagesCount;
-    this.state = state;
-    this.type = type;        
+    this.pagesCount = pagesCount;  
+    this.state = 100;
+    this.type = null;        
   }  
   fix() {
     this.state *= 1.5;
   }
   set state(fixed) {
-    if (this._state < 0) {
+    if (fixed < 0) {
       this._state = 0;
-    } if (this._state > 100) {
+    } if (fixed > 100) {
         this._state = 100;
       } else {
         this._state = fixed;
@@ -66,20 +66,11 @@ class Library {
     }   
   }
   findBookBy(type, value) {
-    //this.type = type;
-    //this.value = value;
-    //for (let i = 0; i < this.books.length; i++) {
-    //  if (this.type[i] == this.value) {
-    //    return this.type;
-    //  } else {
-    //    return null;
-    //  }
-    //}
     const findResult = this.books.find((item) => item[type] === value);
     return findResult || null;
   }  
   giveBookByName(bookName) {    
-    let delivery = this.books.find((item) => item[book.name] == bookName);
-    return (delivery && delete book.name) || null;    
+    const delivery = this.books.find((item) => Object.values(item).includes(bookName));
+    return delivery || null;
   }
 }
