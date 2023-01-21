@@ -70,7 +70,13 @@ class Library {
     return findResult || null;
   }  
   giveBookByName(bookName) {    
-    const delivery = this.books.find((item) => Object.values(item).includes(bookName));
+    function filtered() {
+      (item) => {
+        if (item !== bookName) return item;
+      }
+    }
+    const delivery = this.books.find((item) => Object.values(item).includes(bookName)) && this.books.filter(filtered);
+        
     return delivery || null;
   }
 }
