@@ -78,7 +78,7 @@ class Library {
   //  }
     const delivery = this.books.find((item) => Object.values(item).includes(bookName))
     if (delivery !== undefined) {
-      this.books.filter(b => b !== delivery);
+      this.books = this.books.filter(b => b.delivery !== book.name);
       return delivery;
     } else {
       return null;
