@@ -69,13 +69,7 @@ class Library {
     const findResult = this.books.find((item) => item[type] === value);
     return findResult || null;
   }  
-  giveBookByName(bookName) {    
-  //  if (this.books.find((item) => item[bookName] === bookName)) {
-  //    this.books.filter(b => b !== bookName)
-  //    return bookName;
-  //  } else {
-  //    return null;
-  //  }
+  giveBookByName(bookName) {      
     const delivery = this.books.find((item) => Object.values(item).includes(bookName))
     if (delivery !== undefined) {
       this.books = this.books.filter(b => b.delivery !== book.name);
